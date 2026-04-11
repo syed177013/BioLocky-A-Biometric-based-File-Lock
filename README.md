@@ -12,7 +12,7 @@ Made Jointly by me, @FaizanMohd5 and Mohd Yusuf Hussain
 
 ---
 
-## ✨ Features
+## Features
 
 - **Multi-factor Authentication**
   - Face Recognition (OpenCV)
@@ -33,7 +33,7 @@ Made Jointly by me, @FaizanMohd5 and Mohd Yusuf Hussain
 
 ---
 
-## 🛠️ Requirements
+## Requirements
 
 - Python 3.8 or higher
 

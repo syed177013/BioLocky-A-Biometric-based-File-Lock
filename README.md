@@ -39,7 +39,6 @@ Made Jointly by me, @FaizanMohd5 and Mohd Yusuf Hussain
 
 ### Dependencies
 
-```bash
 pip install -r requirements.txt
 
 

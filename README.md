@@ -1,0 +1,2 @@
+# BioLocky---A-Biometric-based-App-Lock-for-Computers
+Presenting BioLocky, a Biometric based File Lock Application built on Python, Utilizes Face recognition, Speech recognition and a Pin for allowing you to Access your sensitive files in a Nice UI which handles Encryption and Decryption of them as needed as you authenticate yourself. Since its Python and handful of common libs, It runs on any OS 

@@ -1,0 +1,10 @@
+opencv-python
+numpy
+customtkinter
+Pillow
+moviepy
+watchdog
+pyaudio
+SpeechRecognition
+cryptography
+psutil

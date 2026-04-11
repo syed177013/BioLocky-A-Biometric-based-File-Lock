@@ -5,6 +5,7 @@
 BioLocky lets you protect your sensitive files and folders with **Face Recognition**, **Speech Recognition**, and a **PIN** — all wrapped in a clean, modern UI. Once authenticated, it seamlessly handles **encryption/decryption** of your files on the fly.
 
 Since it's pure Python with common libraries, it runs on **Windows, macOS, and Linux**.
+Made Jointly by me, @FaizanMohd5 and Mohd Yusuf Hussain
 
 ![BioLocky Screenshot 1](https://github.com/user-attachments/assets/07a47576-697c-4d89-aece-8e3368b6ad4d)
 ![BioLocky Screenshot 3](https://github.com/user-attachments/assets/6e55f8ea-df53-4388-88a4-5a1f8c39ce82)

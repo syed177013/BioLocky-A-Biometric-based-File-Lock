@@ -76,7 +76,6 @@ biolocky/
 - Voice recognition uses Google's online speech service, so audio is sent for transcription. It is never saved to disk.
 - Face matching is lightweight and **can be fooled by a photo**. Treat it as a convenience layer on top of your passcode, not a replacement for it.
 - Secure-delete is best-effort on SSDs.
-- Never commit `vault_data/`. It's in `.gitignore`.
 
 ## License
 

@@ -2,6 +2,11 @@
 
 An encrypted file vault you unlock with your **face**, **voice**, or **passcode**.
 
+<p align="center">
+  <img src="assets/files.png" width="400" alt="BioLocky Files">
+  <img src="assets/settings_page.png" width="400" alt="BioLocky Settings">
+</p>
+
 Add a file and it's encrypted with AES-256 and moved into the vault. Open it with a quick face or voice check, and it's wiped from your disk again a couple of minutes later.
 
 ## Features
@@ -19,7 +24,7 @@ Add a file and it's encrypted with AES-256 and moved into the vault. Open it wit
 
 ```bash
 git clone https://github.com/syed177013/BioLocky-A-Biometric-based-File-Lock.git
-cd your-repo
+cd BioLocky-A-Biometric-based-File-Lock
 pip install -r requirements.txt
 python main.py
 ```

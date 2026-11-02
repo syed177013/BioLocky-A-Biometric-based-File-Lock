@@ -1,0 +1,27 @@
+# 1. Add a .gitignore
+@"
+vault_data/
+__pycache__/
+*.pyc
+build/
+dist/
+*.spec
+# v1 leftovers
+encryption_keys.json
+encryption_details.json
+pin.key
+pin.dat
+faces/
+files/
+user/
+intruders/
+thumbnails/
+"@ | Set-Content .gitignore
+
+# 2. Stop tracking anything sensitive that was already added
+git rm -r --cached vault_data faces files user intruders thumbnails encryption_keys.json encryption_details.json pin.key pin.dat 2>$null
+
+# 3. Reset your local copy to a fresh-install state
+Remove-Item -Recurse -Force vault_data
+
+git add . ; git commit -m "BioLocky 2.0" ; git push

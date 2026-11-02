@@ -1,58 +1,78 @@
-# BioLocky 
+# BioLocky
 
-**A Biometric-based File Lock Application** built in Python.
+An encrypted file vault you unlock with your **face**, **voice**, or **passcode**.
 
-BioLocky lets you protect your sensitive files and folders with **Face Recognition**, **Speech Recognition**, and a **PIN** — all wrapped in a clean, modern UI. Once authenticated, it seamlessly handles **encryption/decryption** of your files on the fly.
-
-Since it's pure Python with common libraries, it runs on **Windows, macOS, and Linux**.
-Made Jointly by me, @FaizanMohd5 and Mohd Yusuf Hussain
-
-![BioLocky Screenshot 1](https://github.com/user-attachments/assets/07a47576-697c-4d89-aece-8e3368b6ad4d)
-![BioLocky Screenshot 3](https://github.com/user-attachments/assets/6e55f8ea-df53-4388-88a4-5a1f8c39ce82)
-
----
+Add a file and it's encrypted with AES-256 and moved into the vault. Open it with a quick face or voice check, and it's wiped from your disk again a couple of minutes later.
 
 ## Features
 
-- **Multi-factor Authentication**
-  - Face Recognition (OpenCV)
-  - Speech Recognition (Google Speech Recognition)
-  - Traditional PIN fallback
-- **Automatic Encryption & Decryption**
-  - Uses AES encryption via the `cryptography` library
-  - Files are encrypted when locked and decrypted only after successful authentication
-- **Intruder Detection**
-  - Captures a photo of anyone who fails authentication multiple times
-  - Automatically sends the intruder’s photo to your email (configured in `mail.py`)
-- **Modern & Responsive UI**
-  - Built with **CustomTkinter** for a beautiful dark/light mode interface
-- **Cross-Platform**
-  - Works on Windows, macOS, and Linux
-- **File & Folder Monitoring**
-  - Uses `watchdog` to monitor protected directories
+- **Strong encryption.** AES-256-GCM, with keys protected by your passcode (scrypt). Tampering is detected.
+- **Face and voice unlock.** Opening one file unlocks the rest for the session.
+- **Move, don't copy.** Originals are removed once the encrypted copy is verified.
+- **Auto-relock.** The vault locks when idle, and opened files are wiped after a timer, on lock, and on exit.
+- **Recovery code.** A one-time code is shown at setup in case you forget your passcode.
+- **Intruder log.** Failed face unlocks are logged with a photo, with optional e-mail alerts.
+- **Easy to manage.** Multi-select, export, delete, and Explorer-style sorting.
+- **Clean UI.** Light and dark themes.
 
----
+## Quick start
 
-## Requirements
-
-- Python 3.8 or higher
-
-### Dependencies
-
+```bash
+git clone https://github.com/syed177013/BioLocky-A-Biometric-based-File-Lock.git
+cd your-repo
 pip install -r requirements.txt
+python main.py
+```
 
+On first launch, choose a passcode and **save the recovery code**. Then go to **Settings** to set up Face Unlock and a Voice Passphrase.
 
-First launch using main.py : Register your face, voice phrase, and PIN
-Add files/folders you want to protect
-Lock them → files get encrypted automatically
-Unlock using face, speech, or PIN
-Multiple failed attempts → intruder photo captured and emailed
+> Requires Python 3.10+, a webcam for face unlock, and a microphone for voice unlock.
+> On Windows, if `pyaudio` fails to install, use `pip install pipwin && pipwin install pyaudio`.
 
+## Using it
 
-Important Notes
+| Action | How |
+|---|---|
+| Add files | **Add Files** (originals are moved into the vault) |
+| Open a file | Double-click → face / voice / passcode check |
+| Select several | Ctrl/Cmd-click, Shift-click, or **Select All** |
+| Export / delete | Select files → **Export** or **Delete** |
+| Sort | **Sort by** menu: name, date, type, size |
+| Lock now | **Lock Vault** (bottom left) |
 
-Webcam and microphone must be available
-Good lighting helps face recognition accuracy
-Speech recognition performs best in quiet environments
-Use a Gmail App Password for reliable email alerts
-Since its Pythons CV, Having a GPU kinda Helps
+## Build an EXE (Windows)
+
+```bash
+pip install pyinstaller
+pyinstaller --noconsole --onefile --name BioLocky --icon app_icon.ico ^
+  --add-data "resources;resources" --add-data "icons;icons" --add-data "app_icon.png;." ^
+  --collect-all customtkinter --collect-all speech_recognition main.py
+```
+
+The vault is created in a `vault_data` folder next to the EXE.
+
+## Project layout
+
+```
+main.py                 entry point
+biolocky/
+  config.py             paths, settings, app icon
+  crypto.py             AES-GCM streaming, scrypt, key wrapping
+  vault.py              keys, index, import/export, temp-file cleanup
+  face.py  voice.py     camera and mic work (background threads)
+  mailer.py             intruder e-mail alerts
+  legacy.py             import from BioLocky 1.x
+  ui/                   theme, widgets, sheets, app
+```
+
+## Security notes
+
+- **No passcode and no recovery code means no recovery.** There is no backdoor.
+- Voice recognition uses Google's online speech service, so audio is sent for transcription. It is never saved to disk.
+- Face matching is lightweight and **can be fooled by a photo**. Treat it as a convenience layer on top of your passcode, not a replacement for it.
+- Secure-delete is best-effort on SSDs.
+- Never commit `vault_data/`. It's in `.gitignore`.
+
+## License
+
+MIT. Add a `LICENSE` file before publishing.
